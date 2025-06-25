@@ -1,0 +1,32 @@
+<!-- templates/reseñas/reseñas.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseñas</title>
+    <link rel="stylesheet" href="{% static 'landing_page/css/styles.css' %}">
+</head>
+<body>
+    <h1>Reseñas</h1>
+    <ul>
+        {% for reseña in reseñas %}
+            <li class="reseña-item">
+                <strong>{{ reseña.nombre }}</strong>: {{ reseña.comentario }}
+            </li>
+        {% empty %}
+            <li>No hay reseñas aún.</li>
+        {% endfor %}
+    </ul>
+    <h2>Agregar una nueva reseña</h2>
+    <form method="post" class="reseña-form">
+        {% csrf_token %}
+        <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+        {{ form.nombre }}
+        <label for="{{ form.comentario.id_for_label }}">Comentario:</label>
+        {{ form.comentario }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartCoffeUp - Tu Rincón Gamer de Café</title>
+    <link rel="stylesheet" href="{% static 'landing_page/css/styles.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <h1>StartCoffeUp</h1>
+        <h2> --- Café Gamer --- </h2>
+    </header>
+
+    <main>
+        <section>
+            <h2>Gamer Drinks</h2>
+            <ul>
+                {% for bebida in bebidas %}
+                <li>
+                    <strong>{{ bebida.nombre }}</strong>
+                    <span>{{ bebida.descripcion }}</span>
+                    <span class="precio">${{ bebida.precio }}</span>
+                </li>
+                {% empty %}
+                <li>¡Pronto tendremos más bebidas deliciosas para ti!</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Consolas y juegos Disponibles:</h2>
+            <ul>
+                {% for consola in consolas %}
+                {% for juego in consola.juegos %}
+                <li>
+                    <span class="consola-item">
+                        <strong>{{ juego.nombre }}</strong> en <span class="juego-consola">{{ consola.nombre }}</span> -
+                        {{ juego.descripcion }}
+                    </span>
+                </li>
+                {% endfor %}
+                {% empty %}
+                <li>¡Nuestra sala de juegos está preparando nuevas aventuras!</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
+        <section class="promocion">
+            <h2>¡Promoción Especial!</h2>
+            <p><strong>Doble XP en Café:</strong> ¡Con la compra de 2 bebidas, obtén 1 hora extra de juego gratis en tu
+                consola favorita!</p>
+            <p>Válido solo por este mes. ¡No te lo pierdas!</p>
+        </section>
+
+        <section>
+            <h2>Eventos y Torneos:</h2>
+            <ul>
+                {% for evento in eventos %}
+                <li>
+                    <strong>{{ evento.nombre }}</strong> ({{ evento.fecha }}) - {{ evento.descripcion }}
+                    {% if evento.inscripcion_url %}
+                    <a href="{{ evento.inscripcion_url }}"
+                        style="margin-left: 15px; color: #f1c40f; text-decoration: none;">¡Inscríbete aquí!</a>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li>Mantente atento, ¡pronto anunciaremos emocionantes torneos y eventos!</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="reserva-info">
+            <h2>¿Quieres Reservar una Consola?</h2>
+            <p>¡Asegura tu partida! Puedes reservar tu consola preferida y horario anticipadamente para que nunca te
+                quedes sin jugar.</p>
+            <p>Para reservas o eventos privados, contáctanos a <a href="mailto:reservas@startcoffeup.com"
+                    style="color: #f1c40f; text-decoration: none;">reservas@startcoffeup.com</a> o llama al **+56 9 1234
+                5678**.</p>
+        </section>
+
+        <section class="call-to-action">
+            <!-- <a href="/menu/">Ver el Menú Completo</a>
+            <a href="/juegos/">Explorar Todos los Juegos</a>
+            <a href="/contacto/">Visítanos / Cómo Llegar</a> -->
+            <a href="/reseñas/">Reseñas</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 StartCoffeUp. Todos los derechos reservados.</p>
+        <p>Síguenos en nuestras redes: <a href="#" style="color: #f1c40f; text-decoration: none;">Facebook</a> | <a
+                href="#" style="color: #f1c40f; text-decoration: none;">Instagram</a></p>
+        <p>Dirección: Calle SiempreViva 123, Chillán, Chile</p>
+    </footer>
+
+</body>
+
+</html>
